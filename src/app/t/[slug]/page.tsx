@@ -2,6 +2,8 @@ import { db } from '@/lib/db'
 import { notFound } from 'next/navigation'
 import TestimonialForm from './TestimonialForm'
 
+export const dynamic = 'force-dynamic'
+
 interface Props {
   params: { slug: string }
 }

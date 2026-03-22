@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getEmbedUrl } from '@/lib/video-embed'
 
+export const dynamic = 'force-dynamic'
+
 interface Props {
   params: { slug: string }
 }
