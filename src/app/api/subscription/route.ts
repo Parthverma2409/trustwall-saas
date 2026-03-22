@@ -4,6 +4,8 @@ import { db } from '@/lib/db'
 import { getStripe } from '@/lib/stripe'
 import { getPlanFromPriceId } from '@/lib/stripe-prices'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(req: NextRequest) {
   const { userId } = await auth()
   if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })

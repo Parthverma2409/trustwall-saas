@@ -4,6 +4,8 @@ import { submitTestimonialSchema } from '@/lib/validations'
 import { canAddTestimonial } from '@/lib/plans'
 import { detectLanguage } from '@/lib/detect-language'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()

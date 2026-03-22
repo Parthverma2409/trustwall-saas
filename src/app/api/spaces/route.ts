@@ -4,6 +4,8 @@ import { db } from '@/lib/db'
 import { createSpaceSchema } from '@/lib/validations'
 import { canCreateSpace } from '@/lib/plans'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   const { userId } = await auth()
   if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
