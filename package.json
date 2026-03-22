@@ -1,0 +1,53 @@
+{
+  "name": "timeoff-saas",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "latest",
+    "@hookform/resolvers": "latest",
+    "@prisma/client": "latest",
+    "@radix-ui/react-dialog": "latest",
+    "@radix-ui/react-dropdown-menu": "latest",
+    "@radix-ui/react-label": "latest",
+    "@radix-ui/react-slot": "latest",
+    "@trpc/client": "latest",
+    "@trpc/next": "latest",
+    "@trpc/react-query": "latest",
+    "@trpc/server": "latest",
+    "class-variance-authority": "latest",
+    "clsx": "latest",
+    "csv-parse": "latest",
+    "exceljs": "latest",
+    "framer-motion": "latest",
+    "jspdf": "latest",
+    "lucide-react": "latest",
+    "next": "^14",
+    "qrcode": "^1.5.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "latest",
+    "stripe": "latest",
+    "tailwind-merge": "latest",
+    "tailwindcss-animate": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "prisma": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest"
+  }
+}

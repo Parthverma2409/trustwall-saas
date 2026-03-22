@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Space {
+  id           String        @id @default(cuid())
+  userId       String
+  name         String
+  slug         String        @unique
+  logo         String?
+  primaryColor String        @default("#6366f1")
+  thankYouMsg      String   @default("Thank you for your testimonial!")
+  thankYouRedirect String?
+  autoApprove      Boolean  @default(false)
+  autoApproveMinRating Int?
+  views            Int      @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  testimonials Testimonial[]
+
+  @@index([userId])
+  @@index([slug])
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  spaceId     String
+  space       Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  authorName  String
+  authorEmail String?
+  authorTitle String?
+  authorPhoto   String?
+  companyLogo   String?
+  socialLink    String?
+  text          String
+  rating      Int      @default(5)
+  status      String   @default("pending")
+  isFavorite  Boolean  @default(false)
+  tags        String[] @default([])
+  aiSummary   String?
+  language    String?
+  videoUrl    String?
+  createdAt   DateTime @default(now())
+
+  @@index([spaceId])
+  @@index([status])
+}
+
+model Subscription {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  stripeCustomerId String?
+  stripePriceId    String?
+  stripeSubId      String?
+  status           String   @default("free") // free | active | cancelled
+  plan             String   @default("free") // free | starter | pro
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([stripeCustomerId])
+}
