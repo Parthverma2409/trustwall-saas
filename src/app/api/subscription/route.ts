@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@clerk/nextjs/server'
 import { db } from '@/lib/db'
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { getPlanFromPriceId } from '@/lib/stripe-prices'
 
 export async function GET(req: NextRequest) {
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
   // If sync=true and user has a Stripe customer, check Stripe for actual status
   if (sync && sub?.stripeCustomerId) {
     try {
-      const subscriptions = await stripe.subscriptions.list({
+      const subscriptions = await getStripe().subscriptions.list({
         customer: sub.stripeCustomerId,
         status: 'active',
         limit: 1,

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { db } from '@/lib/db'
 import { getPlanFromPriceId } from '@/lib/stripe-prices'
 import Stripe from 'stripe'
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
 
   try {
     if (webhookSecret && sig) {
-      event = stripe.webhooks.constructEvent(body, sig, webhookSecret)
+      event = getStripe().webhooks.constructEvent(body, sig, webhookSecret)
     } else {
       // In development without webhook secret, parse directly
       event = JSON.parse(body) as Stripe.Event
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
         if (!userId) break
 
         // Get the subscription to find the price
-        const sub = await stripe.subscriptions.retrieve(subscriptionId)
+        const sub = await getStripe().subscriptions.retrieve(subscriptionId)
         const priceId = sub.items.data[0]?.price.id || ''
         const plan = session.metadata?.plan || getPlanFromPriceId(priceId)
 
